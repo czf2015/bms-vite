@@ -5,25 +5,24 @@
       <section
         v-for="{ type, id } in list"
         :key="id"
+        draggable="true"
         @dragstart="setOriginId($event, id)"
         @dragenter="setTargetId($event, id)"
         @dragover="allowDrop($event)"
-        draggable="true"
-        :data-id="id"
+        @click="$emit('configure', { type, id })"
       >
         <component
           :is="adapter[type].component"
-          v-bind="{ ...adapter[type].props, id }"
+          v-bind="{ ...adapter[type].props, ...$parent.store[id], id }"
         />
       </section>
-      <Carousel />
     </main>
   </div>
 </template>
 
 
 <script lang="ts">
-import { defineComponent, reactive, watchEffect } from "vue";
+import { defineComponent, defineEmit, reactive } from "vue";
 import Banner from "./partial/Banner.vue";
 import Carousel from '../../components/Base/Carousel.vue'
 import adapter from "./adapter";
@@ -33,7 +32,7 @@ let targetId
 export default defineComponent({
   name: "PageView",
   components: { Banner, Carousel },
-  setup() {
+  setup(props, ctx) {
     const list = reactive([]);
     const allowDrop = (e) => {
       e.preventDefault();
@@ -45,7 +44,7 @@ export default defineComponent({
       const originId = e.dataTransfer.getData("originId");
       // const targetId = e.dataTransfer.getData("targetId");
       console.log({ type, originId, targetId });
-      if (originId) {
+      if (originId) { // 拖拽中间显示内容
         if (targetId) {
           swap(list, originId, targetId);
         } else {
@@ -55,7 +54,7 @@ export default defineComponent({
           list[index] = list[lastIndex];
           list[lastIndex] = tmp;
         }
-      } else {
+      } else { // 从左侧组件面板拖入
         const id =
           list.length > 0
             ? `${Math.max(...list.map((item) => Number(item.id))) + 1}`
@@ -66,6 +65,7 @@ export default defineComponent({
         } else {
           list.push({ id, type });
         }
+        ctx.emit('configure', { id, type })
       }
       // 清理targetId值
       targetId = undefined

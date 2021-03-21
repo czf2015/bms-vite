@@ -1,13 +1,3 @@
-import { isCommaListExpression } from "typescript"
-
-export const convertToRuleForm = (raws) => {
-  const ret = {}
-  raws.forEach(({ field, value }) => {
-    ret[field] = value
-  })
-  return ret
-}
-
 export const convertToRules = (raws) => {
   const ret = {}
   raws.forEach(({ field, rules }) => {

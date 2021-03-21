@@ -6,7 +6,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import WidgetClassifyList from "../../../components/Widget/ClassifyList.vue";
-import mock from "../../../components/Widget/mock.js";
+import mock from "../../../mock/widget.js";
 
 export default defineComponent({
   name: "WidgetView",

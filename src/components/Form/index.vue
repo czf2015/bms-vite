@@ -1,19 +1,20 @@
 <template>
   <el-form
-    :model="ruleForm"
+    :value="options"
+    @change="handleChange"
     :rules="rules"
     ref="form"
     label-width="100px"
   >
     <el-form-item
-      v-for="item in filter(formData)"
+      v-for="item in filter(items)"
       :key="item.field"
       :label="item.label"
       :prop="item.field"
     >
       <component
         :is="adapter[item.component]"
-        v-model="ruleForm[item.field]"
+        v-model="options[item.field]"
         :type="item.type"
         :options="item.options"
       />
@@ -29,7 +30,7 @@
 
 
 <script>
-import { convertToRuleForm, convertToRules, adapter, filter } from "./helpers.js";
+import { convertToRules, adapter, filter } from "./helpers.js";
 import Single from "./Single.vue";
 import Multiple from "./Multiple.vue";
 import CustomSelect from "./Select.vue";
@@ -45,17 +46,23 @@ export default {
   name: "CustomForm",
   components: { Single, Multiple, CustomSelect, CustomInput, DatePicker, Rate, AutoComplete, Slider, Switch, Upload },
   props: {
-    formData: {
+    items: {
       type: Array,
       required: true,
     },
+    options: {
+      type: Object,
+      required: true
+    }
   },
   data() {
-    const rules = convertToRules(this.formData);
-    const ruleForm = convertToRuleForm(this.formData);
-    return { rules, ruleForm, adapter };
+    const rules = convertToRules(this.items);
+    return { rules, adapter };
   },
   methods: {
+    handleChange() {
+      this.$emit('update:options', this.$refs.form.value)
+    },
     submit() {
       this.$refs.form.validate((valid) => {
         if (valid) {
@@ -69,8 +76,8 @@ export default {
     reset() {
       this.$refs.form.resetFields();
     },
-    filter(formData) {
-      return filter(formData, this.ruleForm)
+    filter(items) {
+      return filter(items, this.options)
     }
   },
 };
