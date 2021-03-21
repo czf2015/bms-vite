@@ -1,4 +1,4 @@
-export default [
+export const formProps = [
   {
     component: 'input',
     type: 'text',
