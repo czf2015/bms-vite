@@ -1,18 +1,42 @@
 <template>
   <el-input-number
-    v-model="num"
-    :precision="2"
-    :step="0.1"
-    :max="10"
-    size="small"
-  ></el-input-number>
+    ref="self"
+    @change="handleChange"
+    :value="value"
+    :precision="precision"
+    :step="step"
+    :max="max"
+    :size="size"
+  />
 </template>
+
+
 <script>
 export default {
-  data() {
-    return {
-      num: 1,
-    };
+  props: {
+    value: {
+      type: Number
+    },
+    precision: {
+      type: Number,
+      default: 2
+    },
+    step: {
+      type: Number,
+      default: 1
+    },
+    max: {
+      type: Number
+    },
+    size: {
+      type: String,
+      default: 'small'
+    }
+  },
+  methods: {
+    handleChange() {
+      this.$emit("update:value", this.$refs.self.value);
+    },
   },
 };
 </script>

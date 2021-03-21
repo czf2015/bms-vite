@@ -1,11 +1,18 @@
 <template>
-  <el-checkbox-group v-model="checked" :min="min" :max="max">
+  <el-checkbox-group
+    ref="self"
+    @change="handleChange"
+    :value="select"
+    :min="min"
+    :max="max"
+  >
     <el-checkbox
-      v-for="{ label, text = label, disabled = true } in options"
+      v-for="{ label, text = label, disabled = false } in options"
       :key="label"
       :label="label"
       :disabled="disabled"
-    >{{ text }}</el-checkbox>
+      >{{ text }}</el-checkbox
+    >
   </el-checkbox-group>
 </template>
 
@@ -26,14 +33,9 @@ export default {
       type: Array,
     },
   },
-  data() {
-    return {
-      checked: this.select,
-    };
-  },
-  watch: {
-    checks(val) {
-      this.$emit("change", val);
+  methods: {
+    handleChange() {
+      this.$emit("update:select", this.$refs.self.value);
     },
   },
 };

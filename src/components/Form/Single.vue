@@ -1,11 +1,12 @@
 <template>
-  <el-radio-group v-model="radio">
-    <el-radio 
-      v-for="{ label, text = label, disabled = true } in options" 
-      :key="label" 
+  <el-radio-group ref="self" @change="handleChange" :value="select">
+    <el-radio
+      v-for="{ label, text = label, disabled = false } in options"
+      :key="label"
       :label="label"
       :disabled="disabled"
-    >{{text}}</el-radio>
+      >{{ text }}</el-radio
+    >
   </el-radio-group>
 </template>
 
@@ -17,18 +18,13 @@ export default {
       required: true,
     },
     select: {
-      type: String | Number,
-    }
+      type: [String, Number],
+    },
   },
-  data() {
-    return {
-      radio: this.select,
-    };
+  methods: {
+    handleChange() {
+      this.$emit("update:select", this.$refs.self.value);
+    },
   },
-  watch: {
-    radio(val) {
-      this.$emit('change', val)
-    }
-  }
 };
 </script>

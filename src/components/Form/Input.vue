@@ -2,7 +2,9 @@
 <template>
   <el-input
     :type="type"
-    v-model="inputValue"
+    ref="self"
+    @change="handleChange"
+    :value="value"
     :placeholder="placeholder"
     :maxlength="maxlength"
     :show-word-limit="showWordLimit"
@@ -10,19 +12,17 @@
     :prefix-icon="prefixIcon"
     :suffix-icon="suffixIcon"
   >
-    <template #prepend>
+    <!-- <template #prepend>
       <slot name="prepend"></slot>
     </template>
     <template #append>
       <slot name="append"></slot>
-    </template>
+    </template> -->
   </el-input>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-
-export default defineComponent({
+export default {
   props: {
     type: {
       type: String,
@@ -49,13 +49,16 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    value: {
+      type: [String, Number],
+    },
   },
-  setup() {
-    return {
-      inputValue: ref(""),
-    };
+  methods: {
+    handleChange() {
+      this.$emit("update:value", this.$refs.self.value);
+    },
   },
-});
+};
 </script>
 
 <style>

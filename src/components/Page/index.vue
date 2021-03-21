@@ -16,6 +16,7 @@
           v-bind="{ ...adapter[type].props, id }"
         />
       </section>
+      <Carousel />
     </main>
   </div>
 </template>
@@ -24,13 +25,14 @@
 <script lang="ts">
 import { defineComponent, reactive, watchEffect } from "vue";
 import Banner from "./partial/Banner.vue";
+import Carousel from '../../components/Base/Carousel.vue'
 import adapter from "./adapter";
 import { swap } from "../../utils/Array.js";
 let targetId
 
 export default defineComponent({
   name: "PageView",
-  components: { Banner },
+  components: { Banner, Carousel },
   setup() {
     const list = reactive([]);
     const allowDrop = (e) => {

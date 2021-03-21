@@ -1,7 +1,12 @@
 <template>
-  <el-select v-model="select" :placeholder="placeholder">
+  <el-select
+    ref="self"
+    @change="handleChange"
+    :value="select"
+    :placeholder="placeholder"
+  >
     <el-option
-      v-for="{ label, value = label, disabled = true } in options"
+      v-for="{ label, value = label, disabled = false } in options"
       :key="label"
       :label="label"
       :value="value"
@@ -11,9 +16,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-
-export default defineComponent({
+export default {
   props: {
     options: {
       type: Array,
@@ -23,11 +26,14 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    select: {
+      type: String | Number,
+    },
   },
-  setup() {
-    return {
-      select: ref(""),
-    };
+  methods: {
+    handleChange() {
+      this.$emit("update:select", this.$refs.self.value);
+    },
   },
-});
+};
 </script>

@@ -185,32 +185,29 @@ type OPTION_TYPE = NUMBER_TYPE
     | SWITCH_TYPE
     | SLIDER_TYPE
 
-// interface Store {
-//     // 
-// }
+declare class Panel {
+    title: string // 中文名称
+    type: string
+    options: OPTION_TYPE[] // 配置选项
+}
 
 declare class Widget {
     title: string // 名称：富文本 | 商品 | 商品分类 | 图片广告 | 魔方 | 图文导航 | 文本 | 标题 | 优惠券 | 多人拼团 | 限时秒杀 | 限时折扣 | 优惠套装 | 满减满折 | N元M件 | 店铺信息 | 进入店铺 | 商品搜索 | 公告 | 辅助线 | 视频 | 辅助空白 | 购买公告 | 位置信息
     icon: string // 图标
     type: string // 类别：基础组件 | 营销组件 | 其它组件
-    props: any // 组件属性
-    render(props: any): Node // 渲染函数
 }
 
 declare class Page {
-    title: string // 名称
     id: string // 标识
+    title: string // 名称
     category: string // 分类
     url: string // 路径
     modules: [{
+        id: string,
+        type: string,
         title: string, // 名称
         data: any, // 数据
         extra: OPTION_TYPE[]
     }]
-    render(): Node
 }
 
-declare class Panel {
-    title: string // 中文名称
-    options: OPTION_TYPE[] // 配置选项
-}
