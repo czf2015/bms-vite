@@ -52,7 +52,7 @@ export default {
 <style scoped>
 .panel {
   padding: 20px 40px;
-  width: 1375px;
+  width: 475px;
   height: 812px;
   overflow-y: auto;
   background-color: #fff;
