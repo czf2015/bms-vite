@@ -1,6 +1,6 @@
 <template>
   <template
-    v-for="{ field, label = field, width, children = [] } in columns"
+    v-for="{ field, label = field, width = 150, children = [] } in columns"
     :key="field || label"
   >
     <el-table-column v-if="children.length > 0" :label="label">
