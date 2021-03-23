@@ -11,6 +11,7 @@
     :autosize="autosize"
     :prefix-icon="prefixIcon"
     :suffix-icon="suffixIcon"
+    size="small"
   >
     <!-- <template #prepend>
       <slot name="prepend"></slot>
