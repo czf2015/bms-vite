@@ -30,14 +30,14 @@
 
 <script>
 import CustomTable from "../../components/Table/index.vue";
+import CustomForm from '../Form/index.vue'
 import { convertToFormItems } from "./helpers.js";
 import { convertToOptions } from '../../components/Panel/helpers.js'
 
 export default {
   components: {
     CustomTable,
-    // 解决循环引用问题
-    CustomForm: () => import("../../components/Form/index.vue"),
+    CustomForm,
   },
   props: {
     datasource: {

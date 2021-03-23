@@ -1,3 +1,27 @@
+import Single from "./Single.vue";
+import Multiple from "./Multiple.vue";
+import CustomSelect from "./Select.vue";
+import CustomInput from "./Input.vue";
+import DatePicker from "./DatePicker.vue";
+import Rate from "./Rate.vue";
+import AutoComplete from "./AutoComplete.vue";
+import Slider from "./Slider.vue";
+import Switch from "./Switch.vue";
+import Upload from "./Upload.vue";
+
+export const components = {
+  Single,
+  Multiple,
+  CustomSelect,
+  CustomInput,
+  DatePicker,
+  Rate,
+  AutoComplete,
+  Slider,
+  Switch,
+  Upload,
+}
+
 export const convertToRules = (raws) => {
   const ret = {}
   raws.forEach(({ field, rules }) => {
@@ -21,7 +45,6 @@ export const adapter = {
   tableForm: 'TableForm',
 }
 
-
 const compareValue = (v1, v2) => {
   if (Array.isArray(v1)) {
     return v2.every(item => v1.includes(item))
@@ -43,8 +66,6 @@ const judgePrerequiste = (prerequisite, ruleForm) => {
   }
   return true
 }
-
-
 
 export const filter = (formData, ruleForm) => {
   return formData.filter(item => {

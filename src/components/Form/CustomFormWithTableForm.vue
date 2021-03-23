@@ -17,6 +17,9 @@
         v-model="options[item.field]"
         :type="item.type"
         :options="item.options"
+        :columns="item.columns"
+        :datasource="item.datasource"
+        :operations="item.operations"
       />
     </el-form-item>
     <el-form-item v-if="!auto">
@@ -29,10 +32,11 @@
 
 <script>
 import { convertToRules, adapter, filter, components } from "./helpers.js";
+import TableForm from '../TableForm/index.vue'
 
 export default {
-  name: "CustomForm",
-  components,
+  name: "CustomFormWithTableForm",
+  components: { ...components, TableForm },
   props: {
     items: {
       type: Array,

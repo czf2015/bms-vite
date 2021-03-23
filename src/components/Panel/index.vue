@@ -1,18 +1,18 @@
 <template>
   <div class="panel">
-    <CustomForm :items="items" :options="options" />
+    <CustomFormWithTableForm :items="items" :options="options" />
   </div>
 </template>
 
 
 <script lang="ts">
-import CustomForm from "../Form/index.vue";
+import CustomFormWithTableForm from "../Form/CustomFormWithTableForm.vue";
 import adapter from "./adapter.js";
-import { convertToOptions } from './helpers.js'
+import { convertToOptions } from "./helpers.js";
 
 export default {
   name: "PanelView",
-  components: { CustomForm },
+  components: { CustomFormWithTableForm },
   props: {
     type: {
       type: String,
@@ -28,10 +28,10 @@ export default {
       return adapter[this.type] ? adapter[this.type].items : [];
     },
     options() {
-      if (typeof this.$parent.store[this.id] == 'undefined') {
-        this.$parent.store[this.id] = convertToOptions(this.items)
+      if (typeof this.$parent.store[this.id] == "undefined") {
+        this.$parent.store[this.id] = convertToOptions(this.items);
       }
-      return this.$parent.store[this.id]
+      return this.$parent.store[this.id];
     },
   },
 };
@@ -41,7 +41,7 @@ export default {
 <style scoped>
 .panel {
   padding: 20px 40px;
-  width: 475px;
+  width: 1475px;
   height: 812px;
   overflow-y: auto;
   background-color: #fff;
