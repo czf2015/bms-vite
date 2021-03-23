@@ -6,7 +6,6 @@ export const extract = (formData) => {
     return data;
 };
 
-
 export const convertToFormItems = (columns) => {
     const ret = []
     columns.forEach((column) => {
