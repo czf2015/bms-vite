@@ -22,9 +22,9 @@
 
 
 <script>
-import Wrapper from "./Wrapper";
-import Compose from "./Compose";
-import { extract } from "./helpers";
+import Wrapper from "./Wrapper.vue";
+import Compose from "./Compose.vue";
+import { extract } from "./helpers.js";
 
 export default {
   name: "TableFormContainer",

@@ -22,8 +22,7 @@
 
 
 <script lang="ts">
-import { defineComponent, defineEmit, reactive } from "vue";
-import Banner from "./partial/Banner.vue";
+import { defineComponent, reactive } from "vue";
 import Carousel from '../../components/Base/Carousel.vue'
 import adapter from "./adapter";
 import { swap } from "../../utils/Array.js";
@@ -31,7 +30,7 @@ let targetId
 
 export default defineComponent({
   name: "PageView",
-  components: { Banner, Carousel },
+  components: { Carousel },
   setup(props, ctx) {
     const list = reactive([]);
     const allowDrop = (e) => {

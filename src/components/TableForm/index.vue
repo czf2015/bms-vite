@@ -30,14 +30,13 @@
 
 <script>
 import CustomTable from "../../components/Table/index.vue";
-import CustomForm from "../../components/Form/index.vue";
 import { convertToFormItems } from "./helpers.js";
 import { convertToOptions } from '../../components/Panel/helpers.js'
 
 export default {
   components: {
     CustomTable,
-    CustomForm,
+    CustomForm: () => import("../../components/Form/index.vue"),
   },
   props: {
     datasource: {
