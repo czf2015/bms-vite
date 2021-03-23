@@ -1,5 +1,5 @@
 <template>
-  <el-radio-group ref="self" @change="handleChange" :value="select">
+  <el-radio-group @change="handleChange" :value="select">
     <el-radio
       v-for="{ label, text = label, disabled = false } in options"
       :key="label"
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     handleChange() {
-      this.$emit("update:select", this.$refs.self.value);
+      this.$emit("update:select", this.value);
     },
   },
 };

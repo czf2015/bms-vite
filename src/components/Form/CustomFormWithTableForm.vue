@@ -1,6 +1,6 @@
 <template>
   <el-form
-    :value="options"
+    :model="options"
     @change="handleChange"
     :rules="rules"
     ref="form"
@@ -11,6 +11,7 @@
       :key="item.field"
       :label="item.label"
       :prop="item.field"
+      class="form-item"
     >
       <component
         :is="adapter[item.component]"
@@ -22,7 +23,7 @@
         :operations="item.operations"
       />
     </el-form-item>
-    <el-form-item v-if="!auto">
+    <el-form-item v-if="!auto" class="form-item">
       <el-button type="primary" @click="submit">保存</el-button>
       <el-button @click="reset">取消</el-button>
     </el-form-item>
@@ -32,7 +33,7 @@
 
 <script>
 import { convertToRules, adapter, filter, components } from "./helpers.js";
-import TableForm from '../TableForm/index.vue'
+import TableForm from "../TableForm/index.vue";
 
 export default {
   name: "CustomFormWithTableForm",
@@ -57,7 +58,9 @@ export default {
   },
   methods: {
     handleChange() {
-      this.$emit("update:options", this.$refs.form.value);
+      this.$emit("update:options", this.options);
+      console.log('Form/CustomFormWithTableForm.vue')
+      console.log(this.$parent.options)
     },
     submit() {
       this.$refs.form.validate((valid) => {
@@ -81,4 +84,8 @@ export default {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+.form-item {
+  margin-top: 20px;
+}
+</style>

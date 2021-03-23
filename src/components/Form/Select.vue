@@ -1,8 +1,7 @@
 <template>
   <el-select
-    ref="self"
-    @change="handleChange"
     :value="select"
+    @change="handleChange"
     :placeholder="placeholder"
   >
     <el-option
@@ -27,12 +26,12 @@ export default {
       default: "",
     },
     select: {
-      type: String | Number,
+      type: [String, Number],
     },
   },
   methods: {
     handleChange() {
-      this.$emit("update:select", this.$refs.self.value);
+      this.$emit("update:select", this.value);
     },
   },
 };

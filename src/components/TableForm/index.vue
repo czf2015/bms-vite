@@ -16,11 +16,8 @@
     <div class="mask" v-if="openDialog">
       <CustomForm
         class="dialog"
-        :style="{ transform }"
         :items="state == 'appending' ? formData : formData.filter(filter)"
         :options="options"
-        :legend="legend"
-        :width="width"
         @save="handleFormSave"
         @cancel="handleFormCancel"
       />

@@ -96,7 +96,7 @@ export const items = [
     component: 'autocomplete',
     field: 'auto',
     label: '远程搜索',
-    defaultValue: 0,
+    defaultValue: '',
     // rules: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
   },
   {

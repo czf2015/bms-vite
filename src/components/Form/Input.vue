@@ -2,9 +2,8 @@
 <template>
   <el-input
     :type="type"
-    ref="self"
+    :model="value"
     @change="handleChange"
-    :value="value"
     :placeholder="placeholder"
     :maxlength="maxlength"
     :show-word-limit="showWordLimit"
@@ -56,7 +55,7 @@ export default {
   },
   methods: {
     handleChange() {
-      this.$emit("update:value", this.$refs.self.value);
+      this.$emit("update:value", this.value);
     },
   },
 };

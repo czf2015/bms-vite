@@ -1,6 +1,5 @@
 <template>
   <el-checkbox-group
-    ref="self"
     @change="handleChange"
     :value="select"
     :min="min"
@@ -35,7 +34,7 @@ export default {
   },
   methods: {
     handleChange() {
-      this.$emit("update:select", this.$refs.self.value);
+      this.$emit("update:select", this.value);
     },
   },
 };
