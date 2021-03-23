@@ -28,11 +28,11 @@
   </div>
 </template>
 
+
 <script>
 import CustomTable from "../../components/Table/index.vue";
 import CustomForm from '../Form/index.vue'
 import { convertToFormItems } from "./helpers.js";
-import { convertToOptions } from '../../components/Panel/helpers.js'
 
 export default {
   components: {
@@ -72,20 +72,17 @@ export default {
       legend: "请填写内容",
       formData: [],
       isRevised: false,
-      state: 'saved'
+      state: 'saved',
+      options: {}
     };
-  },
-  computed: {
-    options() {
-      return convertToOptions(this.formData)
-    }
   },
   methods: {
     handleTableCheck(index) {
       console.log(index);
     },
     handleTableEdit(index) {
-      this.formData = convertToFormItems(this.columns, this.datasource[index]);
+      this.formData = convertToFormItems(this.columns);
+      this.options = this.datasource[index]
       this.openDialog = true;
       this.isRevised = true
       this.$emit('edit', index)
@@ -128,6 +125,7 @@ export default {
 };
 </script>
 
+
 <style lang="less" scoped>
 .table-form {
   position: relative;
@@ -145,6 +143,7 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
       margin: 0 auto;
+      padding: 40px;
       min-width: 720px;
       max-width: 960px;
       background-color: #fff;
