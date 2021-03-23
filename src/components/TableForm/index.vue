@@ -36,6 +36,7 @@ import { convertToOptions } from '../../components/Panel/helpers.js'
 export default {
   components: {
     CustomTable,
+    // 解决循环引用问题
     CustomForm: () => import("../../components/Form/index.vue"),
   },
   props: {
