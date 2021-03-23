@@ -17,12 +17,13 @@
         v-model="options[item.field]"
         :type="item.type"
         :options="item.options"
+        :columns="item.columns"
+        :datasource="item.datasource"
+        :operations="item.operations"
       />
     </el-form-item>
-     <el-form-item>
-      <el-button type="primary" @click="submit"
-        >保存</el-button
-      >
+    <el-form-item v-if="!auto">
+      <el-button type="primary" @click="submit">保存</el-button>
       <el-button @click="reset">取消</el-button>
     </el-form-item>
   </el-form>
@@ -41,10 +42,23 @@ import AutoComplete from "./AutoComplete.vue";
 import Slider from "./Slider.vue";
 import Switch from "./Switch.vue";
 import Upload from "./Upload.vue";
+import TableForm from "../TableForm/index.vue";
 
 export default {
   name: "CustomForm",
-  components: { Single, Multiple, CustomSelect, CustomInput, DatePicker, Rate, AutoComplete, Slider, Switch, Upload },
+  components: {
+    Single,
+    Multiple,
+    CustomSelect,
+    CustomInput,
+    DatePicker,
+    Rate,
+    AutoComplete,
+    Slider,
+    Switch,
+    Upload,
+    TableForm,
+  },
   props: {
     items: {
       type: Array,
@@ -52,8 +66,12 @@ export default {
     },
     options: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
+    auto: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     const rules = convertToRules(this.items);
@@ -61,12 +79,12 @@ export default {
   },
   methods: {
     handleChange() {
-      this.$emit('update:options', this.$refs.form.value)
+      this.$emit("update:options", this.$refs.form.value);
     },
     submit() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.$emit('save')
+          this.$emit("save");
         } else {
           console.log("error save!!");
           return false;
@@ -75,11 +93,11 @@ export default {
     },
     reset() {
       this.$refs.form.resetFields();
-      this.$emit('cancel')
+      this.$emit("cancel");
     },
     filter(items) {
-      return filter(items, this.options)
-    }
+      return filter(items, this.options);
+    },
   },
 };
 </script>

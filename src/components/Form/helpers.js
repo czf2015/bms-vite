@@ -18,6 +18,7 @@ export const adapter = {
   slide: 'Slider',
   switch: 'Switch',
   upload: 'Upload',
+  tableForm: 'TableForm',
 }
 
 

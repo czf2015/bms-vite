@@ -31,7 +31,7 @@
 <script>
 import CustomTable from "../../components/Table/index.vue";
 import CustomForm from "../../components/Form/index.vue";
-import { combine } from "./helpers.js";
+import { convertToFormItems } from "./helpers.js";
 import { convertToOptions } from '../../components/Panel/helpers.js'
 
 export default {
@@ -85,7 +85,7 @@ export default {
       console.log(index);
     },
     handleTableEdit(index) {
-      this.formData = combine(this.columns, this.datasource[index]);
+      this.formData = convertToFormItems(this.columns, this.datasource[index]);
       this.openDialog = true;
       this.isRevised = true
       this.$emit('edit', index)

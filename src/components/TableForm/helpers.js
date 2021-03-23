@@ -7,6 +7,14 @@ export const extract = (formData) => {
 };
 
 
-export const combine = (columns, rawData) => columns.map(item => {
-    return { ...item, value: rawData[item.field] }
-})
+export const convertToFormItems = (columns) => {
+    const ret = []
+    columns.forEach((column) => {
+        if (column.children && column.children.length > 0) {
+            ret.push(...convertToFormItems(column.children))
+        } else {
+            ret.push({ ...column, children: undefined })
+        }
+    })
+    return ret
+}

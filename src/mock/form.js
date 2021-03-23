@@ -1,3 +1,5 @@
+import { columns, datasource, operations } from './table.js'
+
 export const items = [
   {
     component: 'input',
@@ -118,5 +120,14 @@ export const items = [
     defaultValue: '',
     // rules: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
   },
-
+  {
+    component: 'tableForm',
+    columns,
+    operations,
+    datasource,
+    field: 'banners',
+    label: '轮播图',
+    defaultValue: [],
+    // rules: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
+  },
 ]

@@ -1,7 +1,7 @@
 <template>
   <div class="compose">
     <CustomForm
-      v-bind="{ datasource: formData, auto }"
+      v-bind="{ ...formData, auto }"
       @change="handleFormChange"
       padding="0"
     />
@@ -21,8 +21,8 @@
 
 
 <script>
-import CustomForm from "@/components/Form";
-import TableForm from "@/components/TableForm";
+import CustomForm from "../../components/Form/index.vue";
+import TableForm from "./index.vue";
 
 export default {
   name: "Compose",
@@ -37,7 +37,7 @@ export default {
     },
     auto: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data() {
